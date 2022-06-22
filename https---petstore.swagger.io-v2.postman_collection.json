@@ -1,0 +1,351 @@
+{
+	"info": {
+		"_postman_id": "81167ce0-e1ca-4e3f-91ca-1d175dd3d968",
+		"name": "https://petstore.swagger.io/v2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "New List of Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"{{name_1}}\",\r\n    \"firstName\": \"Bruce\",\r\n    \"lastName\": \"Willis\",\r\n    \"email\": \"willis@mail.com\",\r\n    \"password\": \"password123\",\r\n    \"phone\": \"888\",\r\n    \"userStatus\": 0\r\n  },\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"{{name_2}}\",\r\n    \"firstName\": \"Arnold\",\r\n    \"lastName\": \"Swartz\",\r\n    \"email\": \"swartz@mail.com\",\r\n    \"password\": \"password456\",\r\n    \"phone\": \"555\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/createWithArray",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"createWithArray"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "name_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Сохраняем номер телефона\", function () {\r",
+							"    var jsonData = JSON.parse(responseBody)\r",
+							"    pm.collectionVariables.set(\"phone_1\", jsonData.phone)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"В теле ответа содержится name_1\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(pm.collectionVariables.get(\"name_1\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/{{name_1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"{{name_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "name_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Сохраняем номер телефона\", function () {\r",
+							"    var jsonData = JSON.parse(responseBody)\r",
+							"    pm.collectionVariables.set(\"phone_2\", jsonData.phone)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"В теле ответа не содержится name_1\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(pm.collectionVariables.get(\"name_1\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/{{name_2}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"{{name_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Сохранение id User_3 в переменную user_id\", function ()  {\r",
+							"    var jsonData = JSON.parse(responseBody)\r",
+							"    pm.collectionVariables.set(\"user_id\", jsonData.message);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.set(\"phone_3\", 333)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 9222968140497193000,\r\n  \"username\": \"ISBach\",\r\n  \"firstName\": \"{{name_1}}\",\r\n  \"lastName\": \"{{name_2}}\",\r\n  \"email\": \"hel@mail.com\",\r\n  \"password\": \"password654\",\r\n  \"phone\": \"{{phone_3}}\",\r\n  \"userStatus\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change user_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 9222968140497193000,\r\n    \"username\": \"ISBach\",\r\n    \"firstName\": \"Daedalus\",\r\n    \"lastName\": \"Icarus\",\r\n    \"email\": \"hel@mail.com\",\r\n    \"password\": \"password654\",\r\n    \"phone\": \"333\",\r\n    \"userStatus\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/{{name_3}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"{{name_3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "name_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"Сохранение имени User_3 в переменную name_3\", function () {\r",
+							"    pm.collectionVariables.set(\"name_3\", jsonData.username);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"ID User 3 содержится в ответе от сервера\", function () {\r",
+							"    pm.expect(pm.collectionVariables.get(\"user_id\")).to.include(jsonData.id);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"В теле ответа не содержится name_1\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(pm.collectionVariables.get(\"name_1\"));\r",
+							"})\r",
+							"\r",
+							"pm.test(\"В теле ответа не содержится name_2\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(pm.collectionVariables.get(\"name_2\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/ISBach",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"ISBach"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://petstore.swagger.io/v2",
+			"type": "string"
+		},
+		{
+			"key": "name_1",
+			"value": "Gold",
+			"type": "string"
+		},
+		{
+			"key": "name_2",
+			"value": "Silver",
+			"type": "string"
+		},
+		{
+			"key": "name_3",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "phone_1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "phone_2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
