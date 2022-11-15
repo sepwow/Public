@@ -1,7 +1,7 @@
-row = list(map(int, input("Введите числа через пробел:\n").split()))
-random_n = int(input("Введите любое число:\n"))
+row = list(map(int, input("Enter numbers separated by spaces:\n").split()))
+random_n = int(input("Enter any number:\n"))
 
-def bubble_sort(row): #Ранжировка по возрастанию
+def bubble_sort(row): #ascending
     for run in range (len(row) - 1):
         for i in range (len(row) - 1 - run):
             if row[i] > row[i+1]:
@@ -9,7 +9,7 @@ def bubble_sort(row): #Ранжировка по возрастанию
     return row
 print(bubble_sort(row))
 
-def binary_search(row, random_n): # Поиск рандомного числа в списке
+def binary_search(row, random_n): #seeking the random number
     low = 0
     high = len(row) - 1
     search_res = False
@@ -28,14 +28,14 @@ def binary_search(row, random_n): # Поиск рандомного числа �
 
 result = binary_search(row, random_n)
 if result:
-    print("Ваше число",random_n,"уже есть в списке и его индекс :",
+    print("Your number",random_n,"is already in the list and its index is :",
           row.index(random_n))
-    print("Индекс предыдущего числа",row[row.index(random_n) - 1],":",
+    print("Previous number index",row[row.index(random_n) - 1],":",
           row.index(random_n) - 1)
 else:
     row.append(random_n)
     bubble_sort(row)
-    print("Ваше число отутствует в списке, индексы рядом стоящих чисел",
+    print("Your number is not in the list, the closest numbers indexes are :",
           row[row.index(random_n) - 1],"и",
           row[row.index(random_n) + 1],":",
           row.index(random_n) - 1,",",
