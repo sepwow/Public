@@ -17,7 +17,8 @@ class TestCalc:
         assert self.calculator.multiply(self, 3, 3) == 9
 
     def test_division_success(self):
-        assert self.calculator.division(self, 10, 5) == 2
+        with pytest.raises(ZeroDivisionError):
+            assert self.calculator.division(self, 10, 5) == 2
 
     def teardown(self):
         print('Выполнение метода Teardown')
